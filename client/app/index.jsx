@@ -31,19 +31,20 @@ class App extends React.Component {
   }
 
   checkForBacktrack(direction) {
-    if (direction[0] === 'N' && this.state.currentLocation[this.state.currentLocation.length - 1] === 'S') {
+    var cL = this.state.currentLocation;
+    if (direction[0] === 'N' && cL[cL.length - 1] === 'S') {
       return true;
     }
 
-    if (direction[0] === 'S' && this.state.currentLocation[this.state.currentLocation.length - 1] === 'N') {
+    if (direction[0] === 'S' && cL[cL.length - 1] === 'N') {
       return true;
     }
 
-    if (direction[0] === 'E' && this.state.currentLocation[this.state.currentLocation.length - 1] === 'W') {
+    if (direction[0] === 'E' && cL[cL.length - 1] === 'W') {
       return true;
     }
 
-    if (direction[0] === 'W' && this.state.currentLocation[this.state.currentLocation.length - 1] === 'E') {
+    if (direction[0] === 'W' && cL[cL.length - 1] === 'E') {
       return true;
     }
 
