@@ -17,6 +17,7 @@ class App extends React.Component {
     };
 
     this.handleNavClick = this.handleNavClick.bind(this);
+    this.handleCaptionSubmit = this.handleCaptionSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -43,6 +44,17 @@ class App extends React.Component {
         currentCaption: response.data.caption,
         isNewRoom: response.data.isNewRoom,
       });
+    });
+  }
+
+  handleCaptionSubmit(caption) {
+    var _this = this;
+
+    axios.post('/' + this.state.currentLocation, {
+      location: _this.state.currentLocation.join(''),
+      caption: caption,
+    }).then(function(response) {
+      console.log(response);
     });
   }
 
@@ -99,6 +111,7 @@ class App extends React.Component {
         <Caption
           caption={this.state.currentCaption}
           isNewRoom={this.state.isNewRoom}
+          handleCaptionSubmit={this.handleCaptionSubmit}
         />
       </div>
     );

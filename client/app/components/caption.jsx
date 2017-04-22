@@ -2,16 +2,30 @@ import React from 'react';
 
 var Caption = (props) => {
 
+  var handleSubmit = () => {
+    var caption = document.getElementsByClassName('captionInput')[0].value;
+    props.handleCaptionSubmit(caption);
+  };
+
   if (props.isNewRoom) {
     return (
       <div>
         <p className="caption">
           {props.caption}
-        </p> 
-        <input
-          type="textarea"
-          class="captionInput"
-        ></input>
+        </p>
+        <form
+          onSubmit={
+            (e) => {
+              e.preventDefault();
+              handleSubmit();
+            }
+          }
+        > 
+          <input
+            type="textarea"
+            className="captionInput"
+          ></input>
+        </form>
       </div>
     );
   } else {
