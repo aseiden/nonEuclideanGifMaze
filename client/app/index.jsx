@@ -1,8 +1,10 @@
 import React from 'react';
 import {render} from 'react-dom';
+import axios from 'axios';
 
 import AwesomeComponent from './components/testComp.jsx';
 import NavButton from './components/navButton.jsx';
+import Caption from './components/caption.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,24 +12,34 @@ class App extends React.Component {
 
     this.state = {
       currentLocation: [],
+      currentCaption: ''
     };
 
     this.handleNavClick = this.handleNavClick.bind(this);
+  }
+
+  componentDidMount() {
+    var _this = this;
+    axios.get('/origin').then(function(response) {
+      _this.setState({
+        currentCaption: response.data,
+      });
+    });
   }
 
   handleNavClick(direction) {
     var newLoc = this.state.currentLocation;
     if (this.checkForBacktrack(direction)) {
       newLoc.pop();
-      this.setState({
-        currentLocation: newLoc,
-      });
     } else {
       newLoc.push(direction[0]);
-      this.setState({
-        currentLocation: newLoc,
-      });
     }
+
+    console.log(this.state.currentCaption);
+
+    this.setState({
+      currentLocation: newLoc,
+    });
   }
 
   checkForBacktrack(direction) {
@@ -50,6 +62,14 @@ class App extends React.Component {
 
     return false;
   }
+
+  loadCaptionFromServer(location) {
+    axios.get(this.state.currentLocation).then(function(response) {
+      console.log('THIS IS THE AXIOS GET RESPONSE: ', response);
+    }).catch(function(error) {
+      console.log(error);
+    });
+  }
   
   render () {
 
@@ -71,6 +91,9 @@ class App extends React.Component {
         <NavButton 
           direction={'West'}
           handleNavClick={this.handleNavClick}
+        />
+        <Caption
+          caption={this.state.currentCaption}
         />
       </div>
     );
