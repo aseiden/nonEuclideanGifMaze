@@ -32,13 +32,20 @@ class App extends React.Component {
   handleNavClick(direction) {
     var _this = this;
     var newLoc = this.state.currentLocation;
+    var newLocStr = '';
     if (this.checkForBacktrack(direction)) {
       newLoc.pop();
     } else {
       newLoc.push(direction[0]);
     }
 
-    axios.get('/' + newLoc.join('')).then(function(response) {
+    if (newLoc.length === 0) {
+      newLocStr = '/origin';
+    } else {
+      newLocStr = '/' + newLoc.join('');
+    }
+
+    axios.get(newLocStr).then(function(response) {
       _this.setState({
         currentLocation: newLoc,
         currentCaption: response.data.caption,
