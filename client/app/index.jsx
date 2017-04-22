@@ -41,6 +41,7 @@ class App extends React.Component {
       _this.setState({
         currentLocation: newLoc,
         currentCaption: response.data.caption,
+        isNewRoom: response.data.isNewRoom,
       });
     });
   }
@@ -97,6 +98,7 @@ class App extends React.Component {
         />
         <Caption
           caption={this.state.currentCaption}
+          isNewRoom={this.state.isNewRoom}
         />
       </div>
     );
