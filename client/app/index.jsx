@@ -54,7 +54,10 @@ class App extends React.Component {
       location: _this.state.currentLocation.join(''),
       caption: caption,
     }).then(function(response) {
-      console.log(response);
+      _this.setState({
+        currentCaption: response.data.caption,
+        isNewRoom: response.data.isNewRoom,
+      });
     });
   }
 
@@ -79,14 +82,6 @@ class App extends React.Component {
     return false;
   }
 
-  // loadCaptionFromServer(location) {
-  //   axios.get(this.state.currentLocation).then(function(response) {
-  //     console.log('THIS IS THE AXIOS GET RESPONSE: ', response);
-  //   }).catch(function(error) {
-  //     console.log(error);
-  //   });
-  // }
-  
   render () {
 
     return (
