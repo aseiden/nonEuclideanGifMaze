@@ -2,9 +2,9 @@ import React from 'react';
 import {render} from 'react-dom';
 import axios from 'axios';
 
-import AwesomeComponent from './components/testComp.jsx';
 import NavButton from './components/navButton.jsx';
 import Caption from './components/caption.jsx';
+import Gif from './components/gif.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -18,6 +18,7 @@ class App extends React.Component {
 
     this.handleNavClick = this.handleNavClick.bind(this);
     this.handleCaptionSubmit = this.handleCaptionSubmit.bind(this);
+    this.handleGifSearch = this.handleGifSearch.bind(this);
   }
 
   componentDidMount() {
@@ -68,6 +69,17 @@ class App extends React.Component {
     });
   }
 
+  handleGifSearch(searchString) {
+    var _this = this;
+
+    axios.post('/gif/' + this.state.currentLocation, {
+      location: _this.state.currentLocation.join(''),
+      searchString: searchString,
+    }).then(function(response) {
+      console.log(response);
+    });
+  }
+
   checkForBacktrack(direction) {
     var cL = this.state.currentLocation;
     if (direction[0] === 'N' && cL[cL.length - 1] === 'S') {
@@ -109,6 +121,11 @@ class App extends React.Component {
         <NavButton 
           direction={'West'}
           handleNavClick={this.handleNavClick}
+        />
+        <hr />
+        <Gif 
+          isNewRoom={this.state.isNewRoom}
+          handleGifSearch={this.handleGifSearch}
         />
         <Caption
           caption={this.state.currentCaption}
