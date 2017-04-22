@@ -7,7 +7,7 @@ var Gif = (props) => {
     props.handleGifSearch(searchString);
   };
 
-  if (props.isNewGif) {
+  if (!props.isNewGif) {
     return (
       <div>
         <p>This is a new room.  There is no Gif... Add one!</p>

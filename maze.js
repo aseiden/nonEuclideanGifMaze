@@ -10,6 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/origin', handler.handleOrigin);
+app.post('/gif/*', handler.handleGifPost);
 app.get('/*', handler.handleRoomNav);
 app.post('/*', handler.handleRoomPost);
 
