@@ -14,6 +14,7 @@ class App extends React.Component {
       currentLocation: [],
       currentCaption: '',
       isNewRoom: false,
+      isNewGif: false,
     };
 
     this.handleNavClick = this.handleNavClick.bind(this);
@@ -124,7 +125,7 @@ class App extends React.Component {
         />
         <hr />
         <Gif 
-          isNewRoom={this.state.isNewRoom}
+          isNewGif={this.state.isNewGif}
           handleGifSearch={this.handleGifSearch}
         />
         <Caption
