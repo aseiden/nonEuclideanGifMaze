@@ -12,7 +12,8 @@ class App extends React.Component {
 
     this.state = {
       currentLocation: [],
-      currentCaption: ''
+      currentCaption: '',
+      isNewRoom: false,
     };
 
     this.handleNavClick = this.handleNavClick.bind(this);
