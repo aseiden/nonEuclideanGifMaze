@@ -22,12 +22,13 @@ class App extends React.Component {
     var _this = this;
     axios.get('/origin').then(function(response) {
       _this.setState({
-        currentCaption: response.data,
+        currentCaption: response.data.caption,
       });
     });
   }
 
   handleNavClick(direction) {
+    var _this = this;
     var newLoc = this.state.currentLocation;
     if (this.checkForBacktrack(direction)) {
       newLoc.pop();
@@ -35,10 +36,11 @@ class App extends React.Component {
       newLoc.push(direction[0]);
     }
 
-    console.log(this.state.currentCaption);
-
-    this.setState({
-      currentLocation: newLoc,
+    axios.get('/' + newLoc.join('')).then(function(response) {
+      _this.setState({
+        currentLocation: newLoc,
+        currentCaption: response.data.caption,
+      });
     });
   }
 
@@ -63,13 +65,13 @@ class App extends React.Component {
     return false;
   }
 
-  loadCaptionFromServer(location) {
-    axios.get(this.state.currentLocation).then(function(response) {
-      console.log('THIS IS THE AXIOS GET RESPONSE: ', response);
-    }).catch(function(error) {
-      console.log(error);
-    });
-  }
+  // loadCaptionFromServer(location) {
+  //   axios.get(this.state.currentLocation).then(function(response) {
+  //     console.log('THIS IS THE AXIOS GET RESPONSE: ', response);
+  //   }).catch(function(error) {
+  //     console.log(error);
+  //   });
+  // }
   
   render () {
 
