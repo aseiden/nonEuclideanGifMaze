@@ -7,8 +7,6 @@ var Gif = (props) => {
     props.handleGifSearch(searchString);
   };
 
-  console.log(props);
-
   if (props.isNoGif) {
     return (
       <div>
