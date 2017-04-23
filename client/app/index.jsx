@@ -13,8 +13,9 @@ class App extends React.Component {
     this.state = {
       currentLocation: [],
       currentCaption: '',
+      currentGifLink: '',
       isNewRoom: false,
-      isNewGif: false,
+      isNoGif: false,
     };
 
     this.handleNavClick = this.handleNavClick.bind(this);
@@ -52,6 +53,7 @@ class App extends React.Component {
         currentLocation: newLoc,
         currentCaption: response.data.caption,
         isNewRoom: response.data.isNewRoom,
+        isNoGif: response.data.isNoGif,
       });
     });
   }
@@ -77,7 +79,12 @@ class App extends React.Component {
       location: _this.state.currentLocation.join(''),
       searchString: searchString,
     }).then(function(response) {
-      console.log(response);
+      console.log(response.data);
+      _this.setState({
+        currentGifLink: response.data.gifLink,
+        isNoGif: response.data.isNoGif,
+      });
+      console.log(_this.state);
     });
   }
 
@@ -125,7 +132,8 @@ class App extends React.Component {
         />
         <hr />
         <Gif 
-          isNewGif={this.state.isNewGif}
+          isNoGif={this.state.isNoGif}
+          currentGif={this.state.currentGifLink}
           handleGifSearch={this.handleGifSearch}
         />
         <Caption

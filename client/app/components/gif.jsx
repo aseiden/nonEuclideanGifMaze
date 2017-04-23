@@ -7,7 +7,9 @@ var Gif = (props) => {
     props.handleGifSearch(searchString);
   };
 
-  if (!props.isNewGif) {
+  console.log(props);
+
+  if (props.isNoGif) {
     return (
       <div>
         <p>This is a new room.  There is no Gif... Add one!</p>
@@ -28,7 +30,7 @@ var Gif = (props) => {
     );
   } else {
     return (
-      <img src="http://media0.giphy.com/media/JIX9t2j0ZTN9S/giphy-downsized-medium.gif"></img>
+      <img src={props.currentGif}></img>
     );
   }  
 
