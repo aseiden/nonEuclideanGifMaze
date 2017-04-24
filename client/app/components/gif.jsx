@@ -10,7 +10,7 @@ var Gif = (props) => {
   if (props.isNoGif) {
     return (
       <div>
-        <p>This is a new room.  There is no Gif... Add one!</p>
+        <p>There is no Gif... Add one!</p>
         <form
           onSubmit={
             (e) => {

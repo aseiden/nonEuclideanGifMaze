@@ -53,6 +53,7 @@ class App extends React.Component {
       _this.setState({
         currentLocation: newLoc,
         currentCaption: response.data.caption,
+        currentGifLink: response.data.gifLink,
         isNewRoom: response.data.isNewRoom,
         isNoGif: response.data.isNoGif,
       });
